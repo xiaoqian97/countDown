@@ -1,60 +1,49 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>烟花秀</title>
-		<link rel="stylesheet" href="firework.css">
-	</head>
-	<body>
-		<div class="wrapper">
-			<div class="wrapper-display">
-				<p id="time">距离2022还有: 10时50分30秒</p>
-			</div>
-			<span></span>
-			<span></span>
-		</div>
-	
-		<canvas id="canvas"></canvas>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>倒计时烟花秀</title>
+    <link rel="stylesheet" href="firework.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="wrapper-display">
+        <p id="time">距离2023春节还有: 10时50分30秒</p>
+      </div>
+      <span></span>
+      <span></span>
+    </div>
+
+    <canvas id="canvas"></canvas>
+  </body>
 </html>
 <script src="firework2.js"></script>
 <script>
-	
-	let time = document.getElementById('time')
-	
-	
-	function getTimeTo2022(){
-		let curr = new Date()
-		let hours = curr.getHours()
-		let minutes = curr.getMinutes()
-		let seconds = curr.getSeconds()
-		
-		let totsec = seconds + minutes * 60 + hours * 60 * 60
-		
-		totsec = 60 * 60 * 24 - totsec
-		
-		hours = Math.floor(totsec / 3600)
-		minutes = Math.floor(totsec / 60 % 60)
-		seconds = Math.floor(totsec % 60)
-		
-		console.log(hours,minutes,seconds)
-		
-		return `${hours}时${minutes}分${seconds}秒`
-	}
-	
-	setInterval(refreshClock,1000)
-	
-	refreshClock()
-	function refreshClock(){
-		let date = new Date()
-		let curr = date.getFullYear() * 10000 + date.getMonth() * 100 + date.getDate()
-		let targ = 20220100
-		// console.log(curr)
-		if(curr >= targ){
-			time.innerText = '虎年快乐！'
-		}else{
-			time.innerText = '距离2022虎年还有:' + getTimeTo2022()
-		}
-		// time.innerText = '距离2022虎年还有:' + getTimeTo2022()
-	}
+  let time = document.getElementById("time");
+
+  function getTimeTo2023() {
+    const NowTime = new Date();
+    const EndTime = new Date("2023/1/22 00:00:00");
+    var t = EndTime.getTime() - NowTime.getTime();
+    var d = Math.floor(t / 1000 / 60 / 60 / 24);
+    var h = Math.floor((t / 1000 / 60 / 60) % 24);
+    var m = Math.floor((t / 1000 / 60) % 60);
+    var s = Math.floor((t / 1000) % 60);
+    var html = d + "天" + h + "时" + m + "分" + s + "秒";
+
+    return html;
+  }
+
+  setInterval(refreshClock, 1000);
+
+  refreshClock();
+  function refreshClock() {
+    const NowTime = new Date();
+    const EndTime = new Date("2023/1/22 00:00:00");
+    if (NowTime > EndTime) {
+      time.innerText = "兔年快乐！";
+    } else {
+      time.innerText = "距离2023春节还有:" + getTimeTo2023();
+    }
+  }
 </script>
